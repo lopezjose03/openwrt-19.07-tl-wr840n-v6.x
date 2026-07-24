@@ -31,6 +31,13 @@ jobs:
           echo "CONFIG_TARGET_ramips_mt76x8_DEVICE_tplink_tl-wr840n-v6=y" >> .config
           echo "CONFIG_PACKAGE_kmod-ipt-ipopt=y" >> .config
           echo "CONFIG_PACKAGE_iptables-mod-ipopt=y" >> .config
+          echo "# CONFIG_PACKAGE_ppp is not set" >> .config
+          echo "# CONFIG_PACKAGE_opkg is not set" >> .config
+          echo "# CONFIG_PACKAGE_openwrt-keyring is not set" >> .config
+          echo "# CONFIG_PACKAGE_libpthread is not set" >> .config
+          echo "CONFIG_TARGET_SQUASHFS_BLOCK_SIZE=512" >> .config
+          echo "CONFIG_KERNEL_STRIP_SYMBOLS=y" >> .config
+          echo "CONFIG_STRIP_KERNEL_EXPORTS=y" >> .config
           make defconfig
 
       - name: Build

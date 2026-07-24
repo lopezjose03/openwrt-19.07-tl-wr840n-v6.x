@@ -26,7 +26,9 @@ jobs:
 
       - name: Configure
         run: |
-          cat config/.config > .config
+          echo "CONFIG_TARGET_ramips=y" > .config
+          echo "CONFIG_TARGET_ramips_mt76x8=y" >> .config
+          echo "CONFIG_TARGET_ramips_mt76x8_DEVICE_tplink_tl-wr840n-v6=y" >> .config
           echo "CONFIG_PACKAGE_kmod-ipt-ipopt=y" >> .config
           echo "CONFIG_PACKAGE_iptables-mod-ipopt=y" >> .config
           make defconfig

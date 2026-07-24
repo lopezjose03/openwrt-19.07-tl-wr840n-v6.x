@@ -19,15 +19,24 @@ jobs:
           rsync subversion swig time unzip wget xsltproc zlib1g-dev
           sudo ln -sf /usr/bin/python2 /usr/bin/python
 
-      - name: Build
+      - name: Update and install feeds
         run: |
-          make defconfig
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+
+      - name: Configure
+        run: |
+          cat config/.config > .config
           echo "CONFIG_PACKAGE_kmod-ipt-ipopt=y" >> .config
           echo "CONFIG_PACKAGE_iptables-mod-ipopt=y" >> .config
+          make defconfig
+
+      - name: Build
+        run: |
           make -j$(nproc) V=s
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: bin/
+          path: bin/targets/ramips/mt76x8/
